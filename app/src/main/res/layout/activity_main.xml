@@ -1,18 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/activity_main_search_bar_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="5dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/activity_main_search_bar_home_iv"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_alignParentStart="true"
+            app:srcCompat="@drawable/ic_home" />
+
+        <RelativeLayout
+            android:id="@+id/activity_main_search_bar_et_container"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_url_et"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/activity_main_search_bar_options_iv"
+            android:layout_toRightOf="@id/activity_main_search_bar_home_iv" >
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/activity_main_search_bar_fav_icon_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="8dp"
+                android:layout_alignParentStart="true"
+                app:srcCompat="@drawable/ic_fav_icon"/>
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/activity_main_search_bar_url_et"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:hint="Search or enter web address..."
+                android:imeOptions="actionGo|flagNoExtractUi|flagNoFullscreen"
+                android:importantForAutofill="no"
+                android:inputType="textUri|textWebEditText|textNoSuggestions|textEmailAddress"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingRight="8dp"
+                android:paddingLeft="2dp"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                android:cursorVisible="false"
+                android:background="@android:color/transparent"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@id/activity_main_search_bar_fav_icon_iv"/>
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/activity_main_search_bar_options_iv"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="8dp"
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/ic_options" />
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/activity_main_webview_pb"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        style="?android:progressBarStyleHorizontal"
+        android:indeterminate="false"
+        android:progressBackgroundTint="#ffffff"
+        android:layout_below="@id/activity_main_search_bar_container" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/activity_main_webview_srl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/activity_main_webview_pb"
+        android:layout_alignParentBottom="true" >
+
+        <WebView
+            android:id="@+id/activity_main_webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbarStyle="insideOverlay" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</RelativeLayout>
