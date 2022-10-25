@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         openIntent.setData(uri);
 
         startActivity(openIntent);
+        finish();
     }
 
     public boolean isWebviewEnabled(){
