@@ -1,11 +1,16 @@
 package com.rb.browser.activities;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -47,12 +52,14 @@ public class BrowserActivity extends AppCompatActivity {
             colorStatusBar = ColorUtils.lightStatusBar;
         }
 
+        /**
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(Color.parseColor(colorStatusBar));
-        
-        initiateViews();
+        **/
 
+        initiateViews();
+        initiateWebview();
 
 
     }
@@ -75,7 +82,30 @@ public class BrowserActivity extends AppCompatActivity {
         rlSearch.getBackground().setColorFilter(Color.parseColor(colorOpacity), PorterDuff.Mode.SRC_ATOP);
         pbWebview.getProgressDrawable().setColorFilter(Color.parseColor(colorBase), PorterDuff.Mode.SRC_IN);
 
+        ivOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(BrowserActivity.this, ivOptions);
+                Menu menu = popupMenu.getMenu();
+                menu.add("Settings");
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        if(menuItem.getTitle().toString().equals("Settings")){
+                            Intent settingsIntent = new Intent(BrowserActivity.this, SettingsActivity.class);
+                            startActivity(settingsIntent);
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
 
+
+    }
+
+    public void initiateWebview(){
 
     }
 
